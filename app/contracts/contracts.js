@@ -12,7 +12,20 @@ angular.module('bookme')
 .controller('contractsCtrl', ContractsCtrl)
 .controller('addContractDialogCtrl', AddContractDialogCtrl);
 
-function ContractsCtrl($scope, $location, $mdPanel, EtheriumService) { 
+function ContractsCtrl($scope, $location, $mdPanel, EtheriumService, 
+    $firebaseObject, Contract) { 
+    console.log(Contract);
+    var currentEther = EtheriumService.getCurrentInstance();
+
+    if(!currentEther) {
+        $location.path("/login");
+        return;
+    }
+    var currentAccountId = currentEther.accountId;
+
+    var ref = firebase.database().ref().child("accounts/" + currentAccountId);
+    $scope.user = $firebaseObject(ref);
+
     $scope.addContractDialog = function($event) {
         var position = $mdPanel.newPanelPosition().absolute().center();
         var config = {
@@ -36,9 +49,9 @@ function ContractsCtrl($scope, $location, $mdPanel, EtheriumService) {
 
 function AddContractDialogCtrl($scope){
     $scope.contract = {
-        product: "",
-        vendor: "",
-        price: "",
+        name: "",
+        supplier: "",
+        value: "",
         bank: ""
     };
 

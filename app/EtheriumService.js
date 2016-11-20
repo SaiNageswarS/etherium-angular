@@ -5,7 +5,7 @@ angular.module('bookme')
         self.accountId = "";
         self.passphrase = "";
         self.host = host;
-        
+
         if (typeof web3 !== 'undefined') {
             web3 = new Web3(web3.currentProvider);
         } else {
@@ -29,9 +29,11 @@ angular.module('bookme')
     var etheriumConnection = null;
     return {
         getConnection: function(host) {
-            if (etheriumConnection === null) {
-                etheriumConnection = new EtheriumConnection(host);
-            }
+            etheriumConnection = new EtheriumConnection(host);
+            return etheriumConnection;
+        },
+
+        getCurrentInstance: function() {
             return etheriumConnection;
         }
     };

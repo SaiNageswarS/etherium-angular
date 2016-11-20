@@ -4,13 +4,17 @@
             <h2>
                 <span>Contracts: Browse, Edit &amp; Monitor</span>
             </h2>
+
+            <span flex></span>
+            <span style="margin-right: 30px;">{{user.name}}</span>
         </div>
     </md-toolbar>
 
     <md-content class="body">
         <div layout="row" layout-align="end" class="addContract">
             <md-button class="md-raised md-primary"
-                ng-click="addContractDialog($event)">
+                ng-click="addContractDialog($event)"
+                ng-disabled="user.role!=='Exporter'">
                 Add a contract
             </md-button>
         </div>
