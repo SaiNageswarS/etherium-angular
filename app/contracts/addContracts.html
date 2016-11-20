@@ -1,0 +1,47 @@
+<md-content class="addContracts">
+    <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>New Contract</span>
+            </h2>
+        </div>
+    </md-toolbar>
+
+    <form class="addContractForm">
+        <div layout="column">
+            <md-input-container flex>
+                <label>Product</label>
+                <input ng-model="contract.product" ng-required>
+            </md-input-container>
+
+            <md-input-container flex>
+                <label>Vendor</label>
+                <input  ng-model="contract.vendor" ng-required>
+            </md-input-container>
+
+            <md-input-container flex>
+                <label>Price</label>
+                <input  ng-model="contract.price" ng-required>
+            </md-input-container>
+
+            <md-input-container flex>
+                <label>Bank</label>
+                <input  ng-model="contract.bank" ng-required>
+            </md-input-container>
+
+            <md-list>
+                <md-subheader class="md-no-sticky">Approvals</md-subheader>
+
+                <md-list-item ng-repeat="approval in approvals">
+                    <p> {{ approval.name }} </p>
+                    <md-checkbox class="md-secondary" ng-model="approval.wanted"></md-checkbox>
+                </md-list-item>
+            </md-list>
+            
+            <md-button type="submit" class="md-primary md-raised">
+                Submit
+            </md-button>
+
+        </div>
+    </form>
+</md-content>

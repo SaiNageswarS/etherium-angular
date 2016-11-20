@@ -2,6 +2,8 @@ angular.module('bookme')
 .factory('EtheriumService', function () {
     function EtheriumConnection(host) {
         var self = this;
+        self.accountId = "";
+        self.passphrase = "";
         if (typeof web3 !== 'undefined') {
             web3 = new Web3(web3.currentProvider);
         } else {
@@ -10,6 +12,8 @@ angular.module('bookme')
         }
 
         self.setDefaultAccount = function(account, password) {
+            self.accountId = account;
+            self.passphrase = password;
             web3.eth.defaultAccount = account;
             web3.personal.unlockAccount(web3.eth.defaultAccount, password);
         };

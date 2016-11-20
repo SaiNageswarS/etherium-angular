@@ -10,3 +10,14 @@
     width: 300px; }
   .login-page .signin-control {
     min-width: 350px; }
+
+.contracts .addContract {
+  padding: 15px; }
+
+.contracts .body {
+  padding: 30px; }
+
+.addContracts {
+  width: 700px; }
+  .addContracts .addContractForm {
+    padding: 30px; }

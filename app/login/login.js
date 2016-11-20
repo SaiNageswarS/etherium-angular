@@ -21,8 +21,9 @@ angular.module('bookme')
     };
 
     $scope.login = function() {
-      $scope.isLoading = true;
-      
+      etheriumConnection.setDefaultAccount($scope.ether.etheriumAccountId,
+                          $scope.ether.passphrase);
+      $location.path("/contracts")
     };
 
     $scope.getAccounts = function() {
