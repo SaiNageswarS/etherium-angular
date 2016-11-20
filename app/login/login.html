@@ -1,0 +1,44 @@
+<md-content class="login-page">
+    <div class="loading" ng-if="isLoading" layout-align="space-around">
+        <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <div layout="row" ng-if="!isLoading" layout-align="center">
+        <div layout="column">
+            <div layout="row" layout-align="center">
+                <h2>Login</h2>
+            </div>
+            <form layout="row" ng-submit="login()">
+                <md-content>
+                    <div layout="row">
+                        <md-input-container class="signin-control">
+                            <label>Etherium Server</label>
+                            <input ng-model="ether.etheriumServer" ng-required>
+                        </md-input-container>
+                    </div>
+                    <div layout="row">
+                        <md-input-container class="signin-control">
+                            <label>Account Id</label>
+                            <input ng-model="ether.etheriumAccountId" ng-required>
+                        </md-input-container>
+                    </div>
+                    <div layout="row">
+                        <md-input-container class="signin-control">
+                            <label>Passphrase</label>
+                            <input ng-model="ether.passphrase" ng-required>
+                        </md-input-container>
+                    </div>
+
+                    <div layout="row" layout-align="center">
+                        <md-button type="submit" class="md-raised md-primary" aria-label="Login">
+                            Login
+                        </md-button>
+                    </div>
+                </md-content>
+
+        </form>
+    </div>
+
+</div>
+
+</md-content>

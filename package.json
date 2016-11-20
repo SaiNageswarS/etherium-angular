@@ -10,5 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "web3": "^0.17.0-beta"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.2"
   }
 }
