@@ -3,7 +3,8 @@
 // Declare app level module which depends on views, and components
 angular.module('bookme', [
   'ngRoute',
-  'ngMaterial'
+  'ngMaterial',
+  'firebase'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');

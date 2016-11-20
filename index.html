@@ -22,18 +22,38 @@
   <![endif]-->
 
   <div ng-view></div>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCJiUuEbJdISdtDD5HBU4T63DW_HKpa5Tg",
+        authDomain: "etherconfig.firebaseapp.com",
+        databaseURL: "https://etherconfig.firebaseio.com",
+        storageBucket: "etherconfig.appspot.com",
+        messagingSenderId: "191265023949"
+    };
+    firebase.initializeApp(config);
+    </script>
+
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>  
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-aria.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-animate.min.js"></script>
-  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.1/angular-material.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.1/angular-material.min.js"></script>  
+  <!-- AngularFire -->
+  <script src="https://cdn.firebase.com/libs/angularfire/2.1.0/angularfire.min.js"></script>
   <script src="app/app.js"></script>
   <script src="node_modules/bignumber.js/bignumber.min.js"></script>
   <script src="node_modules/web3/dist/web3.min.js"></script>
+
+  <!-- own dependecies -->
+  <!--<script src="node_modules/angular-data-grid/dist/dataGrid.min.js"></script>
+  <script src="node_modules/angular-data-grid/dist/pagination.min.js"></script>-->
   <script src="app/EtheriumService.js"></script>
   <script src="app/login/login.js"></script>
   <script src="app/contracts/contracts.js"></script>
+  <script src="app/admin/admin.js"></script>
 </body>
 </html>

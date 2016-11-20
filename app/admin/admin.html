@@ -1,0 +1,54 @@
+<md-content class="admin">
+    <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>Admin</span>
+            </h2>
+        </div>
+    </md-toolbar>
+
+    <md-content class="body">
+        <div layout="row" layout-align="end">
+            
+                <md-input-container>
+                    <label>Host</label>
+                    <input ng-model="eth.host" 
+                        ng-required>
+                </md-input-container>
+                <md-button ng-click="syncAccounts()" style="max-height: 25px; margin-top: 16px;">
+                    <img src="app/img/sync.png" width="25px">
+                </md-button>
+            
+        </div>
+
+        <h2 style="margin-left: 100px;"> Accounts </h2>
+
+        <md-card layout="column" style="width: 700px; margin-left:100px"
+            ng-repeat="(accountId, details) in accounts">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">{{accountId}}</span>
+                </md-card-title-text>
+                
+            </md-card-title>
+
+            <md-card-content>
+                <md-input-container flex>
+                    <label>Host</label>
+                    <input  ng-model="details.host" ng-required>
+                </md-input-container>
+
+                <md-input-container flex>
+                    <label>Name</label>
+                    <input  ng-model="details.name" ng-required>
+                </md-input-container>
+
+                <md-input-container flex>
+                    <label>Role</label>
+                    <input  ng-model="details.role" ng-required>
+                </md-input-container>
+            </md-card-content>
+        </md-card>
+        
+    </md-content>
+</md-content>

@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "angular-data-grid": "^0.1.0",
     "web3": "^0.17.0-beta"
   },
   "devDependencies": {
