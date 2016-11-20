@@ -9,18 +9,27 @@ angular.module('bookme')
   });
 }])
 
-.controller('loginCtrl', function($scope, $location) { 
+.controller('loginCtrl', function($scope, $location, EtheriumService) { 
     $scope.isLoading = false;
 
+    $scope.accounts = [];
+    var etheriumConnection = null;
     $scope.ether = {
       etheriumServer: "http://localhost:8545",
-      etheriumAccountId: "0x12dw23dfsdf2sdadasasda31",
+      etheriumAccountId: "",
       passphrase: ""
     };
 
     $scope.login = function() {
       $scope.isLoading = true;
       
+    };
+
+    $scope.getAccounts = function() {
+      if($scope.ether.etheriumServer) {
+        etheriumConnection = EtheriumService.getConnection($scope.ether.etheriumServer);
+        $scope.accounts = etheriumConnection.getAccounts();
+      }
     };
   
 });

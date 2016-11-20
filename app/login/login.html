@@ -13,13 +13,22 @@
                     <div layout="row">
                         <md-input-container class="signin-control">
                             <label>Etherium Server</label>
-                            <input ng-model="ether.etheriumServer" ng-required>
+                            <input ng-model="ether.etheriumServer" 
+                                ng-blur="getAccounts()"
+                                ng-required>
                         </md-input-container>
                     </div>
                     <div layout="row">
                         <md-input-container class="signin-control">
                             <label>Account Id</label>
-                            <input ng-model="ether.etheriumAccountId" ng-required>
+                            <md-select 
+                                ng-model="ether.etheriumAccountId"
+                                ng-disabled="accounts.length === 0">
+                                <md-option ng-repeat="account in accounts"
+                                    ng-value="account">
+                                    {{account}}
+                                </md-option>
+                            </md-select>
                         </md-input-container>
                     </div>
                     <div layout="row">
