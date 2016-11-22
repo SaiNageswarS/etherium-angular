@@ -9,8 +9,12 @@ angular.module('bookme')
   });
 }])
 
-.controller('loginCtrl', function($scope, $location, EtheriumService) { 
+.controller('loginCtrl', function($scope, $location, $firebaseObject,
+             EtheriumService) { 
     $scope.isLoading = false;
+
+    var ref = firebase.database().ref().child("accounts");
+    $scope.serverAccounts = $firebaseObject(ref);
 
     $scope.accounts = [];
     var etheriumConnection = null;

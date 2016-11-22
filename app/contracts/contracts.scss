@@ -5,6 +5,32 @@
 
     .body {
         padding: 30px;
+
+        .chip {
+            display: block;
+            float: left;
+            white-space: nowrap;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            background: rgb(224,224,224);
+            color: rgb(66,66,66);
+            cursor: default;
+            border-radius: 16px;
+            display: block;
+            height: 32px;
+            line-height: 32px;
+            margin: 8px 8px 0 0;
+            padding: 0 12px;
+            float: left;
+            box-sizing: border-box;
+            max-width: 100%;
+            position: relative;
+
+            &.approved {
+                background: aquamarine;
+            }
+        }
     }
 }
 

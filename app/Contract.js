@@ -25,27 +25,35 @@ contract ShipperContract is mortal {
     string supplierName;
     string value;
     string bank;
+    address importerBank;
     address trucker;
     address portAuthority;
     address customs;
+    address exporterBank;
     address parentBlock;
 
     function ShipperContract(string _name, 
             string _supplierName,
             string _value,
             string _bank,
-            bool _trucker,
-            bool _portAuthority,
-            bool _customs,
-            _parentBlock) public {
+            address _trucker,
+            address _portAuthority,
+            address _customs,
+            address _exporterBank,
+            address _importerBank,
+            address _parentBlock) public {
         name = _name;
         supplierName = _supplierName;
         value = _value;
         bank = _bank;
         trucker = _trucker;
         customs = _customs;
+        exporterBank = _exporterBank;
+        importerBank = _importerBank;
         parentBlock = _parentBlock;
     }
+
+    function set
 
     function greet() constant returns (string) {
         return greeting;

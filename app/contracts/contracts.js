@@ -12,10 +12,17 @@ angular.module('bookme')
 .controller('contractsCtrl', ContractsCtrl)
 .controller('addContractDialogCtrl', AddContractDialogCtrl);
 
+/**
+ * Roles: ImporterBank, Exporter, PortAuthority, Trucker, Customs
+ */
+
 function ContractsCtrl($scope, $location, $mdPanel, EtheriumService, 
-    $firebaseObject, Contract) { 
+    $firebaseObject, $firebaseArray, Contract) { 
     console.log(Contract);
     var currentEther = EtheriumService.getCurrentInstance();
+
+    var contractsRef = firebase.database().ref().child("contracts");
+    $scope.contracts = $firebaseArray(contractsRef);
 
     if(!currentEther) {
         $location.path("/login");
@@ -38,26 +45,67 @@ function ContractsCtrl($scope, $location, $mdPanel, EtheriumService,
             panelClass: 'demo-dialog-example',
             position: position,
             trapFocus: true,
-            zIndex: 150,
+            zIndex: 50,
             clickOutsideToClose: true,
             escapeToClose: true,
             focusOnOpen: true
         };
         $mdPanel.open(config);
     };
+
+    $scope.roleAuthorityApproval = {
+        Trucker: "truckerApproved",
+        ImporterBank: "importerBankApproved",
+        Customs: "customsApproved",
+        PortAuthority: "portAuthorityApproved"
+    };
+    $scope.approvals = Object.keys($scope.roleAuthorityApproval);
+
+    $scope.saveContract = function(contract) {
+        $scope.contracts.$save(contract);
+    };
 }
 
-function AddContractDialogCtrl($scope){
+function AddContractDialogCtrl(mdPanelRef, $scope, $firebaseObject,
+                                    $firebaseArray, $mdToast){
     $scope.contract = {
         name: "",
         supplier: "",
         value: "",
-        bank: ""
+        bank: "",
+        portAuthorityApproved: false,
+        truckerApproved: false,
+        customsApproved: false
     };
 
-    $scope.approvals = [
-        {name: "Trucker", wanted: true},
-        {name: "PortAuthority", wanted: true},
-        {name: "CustomsAuthority", wanted: true}        
-    ];
+    var contractsRef = firebase.database().ref().child("contracts");
+    $scope.contracts = $firebaseArray(contractsRef);
+
+    var accountsRef = firebase.database().ref().child("accounts");
+    $scope.accounts = $firebaseObject(accountsRef);
+
+    $scope.addContract = function() {
+        $scope.contracts.$add($scope.contract);
+        
+        $mdToast.show(
+            $mdToast.simple()
+                .textContent('Contract Added!')
+                .position('top right')
+                .hideDelay(3000)
+            );
+
+        mdPanelRef.close();
+    };
 };
+
+angular.module('bookme').filter('with', function() {
+  return function(accounts, role) {
+        var result = {};
+        angular.forEach(accounts, function(desc, accountId) {
+            if (desc["role"] === role) {
+                result[accountId] = desc;
+            }
+        });
+        return result;
+    };
+});

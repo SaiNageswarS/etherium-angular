@@ -14,13 +14,45 @@
         <div layout="row" layout-align="end" class="addContract">
             <md-button class="md-raised md-primary"
                 ng-click="addContractDialog($event)"
-                ng-disabled="user.role!=='Exporter'">
+                ng-disabled="user.role!=='ImporterBank'">
                 Add a contract
             </md-button>
         </div>
 
         <div layout="row">
-            <h2>My Contracts</h2>
+            <h2 ng-if="user.role==='ImporterBank'">My Contracts</h2>
+            <h2 ng-if="user.role!=='ImporterBank'">My Approvals</h2>            
+        </div>
+        <div>
+            <md-list flex>
+                <md-list-item class="md-3-line"  ng-repeat="contract in contracts">
+                    <div class="md-list-item-text" layout="column">
+                        <md-checkbox ng-model="contract[roleAuthorityApproval[user.role]]" 
+                            ng-if="user.role!=='ImporterBank'"
+                            ng-change="saveContract(contract)">
+                            <h3>{{contract.name}}</h3>
+                        </md-checkbox>
+                        <h3 ng-if="user.role==='ImporterBank'">{{contract.name}}</h3>
+                        <h4>Supplier: {{contract.supplier}}</h4>
+                        <p>
+                            Value: {{contract.value}}
+                            <div layout="row" ng-if="user.role==='ImporterBank'">
+                                <div class="chip" ng-class="{approved: contract.truckerApproved}">Trucker</div>
+                                <div class="chip" ng-class="{approved: contract.portAuthorityApproved}">PortAuthority</div>
+                                <div class="chip" ng-class="{approved: contract.customsApproved}">Customs</div>
+                            </div>
+                            <!--<md-chips ng-model="approvals" name="fruitName" readonly="true"
+                                    md-removable="false" md-max-chips="5"
+                                    ng-if="user.role==='ImporterBank'"
+                                    >
+                            <md-chip-template>
+                                <strong>{{$chip}}</strong>
+                            </md-chip-template>
+                        </md-chips>-->
+                        </p>
+                    </div>
+                </md-list-item>
+            </md-list>
         </div>
     </md-content>
 </md-content>

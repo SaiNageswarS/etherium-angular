@@ -26,7 +26,7 @@
                                 ng-disabled="accounts.length === 0">
                                 <md-option ng-repeat="account in accounts"
                                     ng-value="account">
-                                    {{account}}
+                                    {{serverAccounts[account].role || account}}
                                 </md-option>
                             </md-select>
                         </md-input-container>

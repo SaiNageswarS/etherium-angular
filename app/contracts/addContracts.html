@@ -7,7 +7,7 @@
         </div>
     </md-toolbar>
 
-    <form class="addContractForm">
+    <form class="addContractForm" ng-submit="addContract()">
         <div layout="column">
             <md-input-container flex>
                 <label>Contract Name</label>
@@ -16,7 +16,13 @@
 
             <md-input-container flex>
                 <label>Supplier Name</label>
-                <input  ng-model="contract.supplier" ng-required>
+                <md-select 
+                    ng-model="contract.supplier">
+                    <md-option ng-repeat="(accountId, desc) in accounts | with: 'Exporter'"
+                        ng-value="accountId">
+                        {{desc.name}}
+                    </md-option>
+                </md-select>
             </md-input-container>
 
             <md-input-container flex>
@@ -26,17 +32,14 @@
 
             <md-input-container flex>
                 <label>Bank</label>
-                <input  ng-model="contract.bank" ng-required>
+                <md-select 
+                    ng-model="contract.bank">
+                    <md-option ng-repeat="(accountId, desc) in accounts | with: 'ImporterBank'"
+                        ng-value="accountId">
+                        {{desc.name}}
+                    </md-option>
+                </md-select>
             </md-input-container>
-
-            <md-list>
-                <md-subheader class="md-no-sticky">Approvals</md-subheader>
-
-                <md-list-item ng-repeat="approval in approvals">
-                    <p> {{ approval.name }} </p>
-                    <md-checkbox class="md-secondary" ng-model="approval.wanted"></md-checkbox>
-                </md-list-item>
-            </md-list>
             
             <md-button type="submit" class="md-primary md-raised">
                 Submit
