@@ -6,7 +6,12 @@
             </h2>
 
             <span flex></span>
-            <span style="margin-right: 30px;">{{user.name}}</span>
+            <span style="margin-right: 30px;">
+                <div layout="column">
+                    <div>{{user.name}}</div>
+                    <div style="font-size: 15px;"><a href="#!/login">Sign Out</a></div>
+                </div>
+            </span>
         </div>
     </md-toolbar>
 
@@ -19,20 +24,25 @@
             </md-button>
         </div>
 
+        <div layout="row" layout-align="center center" 
+                ng-if="user.role==='ImporterBank'">
+            <h2>Balance: USD {{3000000 - totalContractVal}}</h2>
+        </div>
+
+        <div layout="row" layout-align="center center" 
+                ng-if="user.role==='Exporter'">
+            <h2>Balance: USD {{100000 + totalContractVal}}</h2>
+        </div>
+
         <div layout="row">
-            <h2 ng-if="user.role==='ImporterBank'">My Contracts</h2>
-            <h2 ng-if="user.role!=='ImporterBank'">My Approvals</h2>            
+            <h2>My Contracts</h2>
+            <!--<h2 ng-if="user.role!=='ImporterBank'">My Approvals</h2>            -->
         </div>
         <div>
             <md-list flex>
                 <md-list-item class="md-3-line"  ng-repeat="contract in contracts">
                     <div class="md-list-item-text" layout="column">
-                        <md-checkbox ng-model="contract[roleAuthorityApproval[user.role]]" 
-                            ng-if="user.role!=='ImporterBank'"
-                            ng-change="saveContract(contract)">
-                            <h3>{{contract.name}}</h3>
-                        </md-checkbox>
-                        <h3 ng-if="user.role==='ImporterBank'">{{contract.name}}</h3>
+                        <h3>{{contract.name}}</h3>
                         <h4>Supplier: {{contract.supplier}}</h4>
                         <p>
                             Value: {{contract.value}}
@@ -51,6 +61,12 @@
                         </md-chips>-->
                         </p>
                     </div>
+                    <md-button class="md-raised md-primary" 
+                        ng-if="user.role!=='ImporterBank' && user.role!=='Exporter'"
+                        ng-click="saveContract(contract)"
+                        ng-disabled="contract[roleAuthorityApproval[user.role]]">
+                        Approve</md-button>
+                     <md-divider></md-divider>
                 </md-list-item>
             </md-list>
         </div>

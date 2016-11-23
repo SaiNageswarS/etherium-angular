@@ -23,6 +23,17 @@ function ContractsCtrl($scope, $location, $mdPanel, EtheriumService,
 
     var contractsRef = firebase.database().ref().child("contracts");
     $scope.contracts = $firebaseArray(contractsRef);
+    
+    $scope.contracts.$loaded().then(function() {
+        $scope.totalContractVal = 0;
+        angular.forEach($scope.contracts, 
+            function(contract){
+                if (contract.value && contract.portAuthorityApproved &&
+                        contract.truckerApproved && contract.customsApproved) {
+                    $scope.totalContractVal += parseInt(contract.value); 
+                }
+            });
+    });
 
     if(!currentEther) {
         $location.path("/login");
