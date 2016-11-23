@@ -17,7 +17,7 @@ angular.module('bookme')
  */
 
 function ContractsCtrl($scope, $location, $mdPanel, EtheriumService, 
-    $firebaseObject, $firebaseArray, Contract) { 
+    $firebaseObject, $firebaseArray, $mdToast, Contract) { 
     console.log(Contract);
     var currentEther = EtheriumService.getCurrentInstance();
 
@@ -73,7 +73,14 @@ function ContractsCtrl($scope, $location, $mdPanel, EtheriumService,
     $scope.approvals = Object.keys($scope.roleAuthorityApproval);
 
     $scope.saveContract = function(contract) {
+        contract[$scope.roleAuthorityApproval[$scope.user.role]] = true;
         $scope.contracts.$save(contract);
+        $mdToast.show(
+            $mdToast.simple()
+                .textContent('Contract Approved!')
+                .position('top right')
+                .hideDelay(6000)
+            );
     };
 }
 

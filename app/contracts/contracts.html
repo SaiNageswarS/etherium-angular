@@ -1,5 +1,8 @@
 <md-content class="contracts">
-    <md-toolbar class="md-primary">
+    <md-toolbar ng-class="{'md-primary': user.role==='ImporterBank' || user.role==='Exporter',
+            'md-accent': user.role==='Customs',
+            'md-warn': user.role==='Trucker',
+            'md-background': user.role==='PortAuthority'}">
         <div class="md-toolbar-tools">
             <h2>
                 <span>Contracts: Browse, Edit &amp; Monitor</span>
